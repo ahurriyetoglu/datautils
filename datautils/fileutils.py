@@ -34,9 +34,9 @@ def read_twiqs_csv(twiqs_csv, how="basic"):
         """
 	if how=='basic':
 		return pd.read_table(twiqs_csv, parse_dates=[[0,1]], usecols=[2,3,6,7], encoding='utf-8',\
-                               names=['dt','etime', 'user', 'ttext'], skiprows=1)
+                               names=['dt','etime', 'user', 'ttext'], skiprows=1, quoting=3)
 	elif how=='all':
-		temp_df = pd.read_table(twiqs_csv, parse_dates=[[2,3]], usecols=[0,1,2,3,4,5,6,7], encoding='utf-8')
+		temp_df = pd.read_table(twiqs_csv, parse_dates=[[2,3]], usecols=[0,1,2,3,4,5,6,7], encoding='utf-8', quoting=3)
 		temp_df.columns = [c.replace('#','') for c in temp_df.columns]
 		return temp_df
 	else:
