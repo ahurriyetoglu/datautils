@@ -1,6 +1,7 @@
+from collections import OrderedDict
 
 class twtokenizer():
-    
+
     self.toReplaceDict = OrderedDict({'!!*':' ! ','\?':' ? ', '\"':' " ',"“":" “ ","”":" ” ", "\'\'*":"'","\' ":" ' "
     ," \'":" ' ",'&amp;':'&','&gt;':'>','&lt;':'<', '~~*':' ~ ',"¿¿*":" ¿ ",'\.\.\.':' ... ','\.\.':' .. '
     ,'…':' … ',"\(\(*":'(',"\)\)*":')',"\+\+*":'+',"\*\**":'*',"\|\|*":"|","\$\$*":"$","%%*":"%",">>*":">","<<*":"<","--*":"-" 
@@ -48,7 +49,7 @@ class twtokenizer():
                 
         return newtw
 
-    def tokenize_df(self, tokdf,texcol="tweet",newtexcol='texttok',rescol="textlist"):
+    def tokenize_df(self, tokdf, texcol="tweet", newtexcol='texttok', rescol="textlist"):
         #concert_table.drop_duplicates()
         # Note
         # tokdf[newtexcol] = tokdf[newtexcol].str.replace("""\xa0"""," ")
