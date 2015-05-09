@@ -49,18 +49,23 @@ class twtokenizer():
                 
         return newtw
 
-    def tokenize_df(self, tokdf, texcol="tweet", newtexcol='texttok', rescol="textlist"):
+    def tokenize_df(self, tokdf,texcol="tweet", newtexcol='texttokCap',rescol="ttextlist", addLowerTok=True):
         #concert_table.drop_duplicates()
         # Note
         # tokdf[newtexcol] = tokdf[newtexcol].str.replace("""\xa0"""," ")
         # tokdf[newtexcol] = tokdf[newtexcol].str.replace("\n"," . ")
-        tokdf[newtexcol] = tokdf[texcol].str.lower()
-
-        tokdf[newtexcol] = tokdf[newtexcol].replace(self.toReplaceDict, regex=True)
+        
+        tokdf[newtexcol] = tokdf[texcol].copy()
+    
+        tokdf[newtexcol] = tokdf[newtexcol].replace(toReplaceDict, regex=True)
         tokdf[newtexcol][tokdf[newtexcol].str.endswith(".")] = tokdf[tokdf[newtexcol].str.endswith(".")][newtexcol].apply(lambda tw: tw[:-1]+' .') 
         tokdf[newtexcol][tokdf[newtexcol].str.endswith(".'")] = tokdf[tokdf[newtexcol].str.endswith(".'")][newtexcol].apply(lambda tw: tw[:-2]+" . '") 
         tokdf[newtexcol][tokdf[newtexcol].str.startswith("'")] = tokdf[tokdf[newtexcol].str.startswith("'")][newtexcol].apply(lambda tw: "' "+tw[1:])
-
-        tokdf[newtexcol] = tokdf[newtexcol].apply(self.tokenize)
+    
+        tokdf[newtexcol] = tokdf[newtexcol].apply(tokenize)
         tokdf[rescol] = tokdf[newtexcol].str.split()
+        
+        if addLowerTok:
+            tokdf[newtexcol[:-3]] = tokdf[newtexcol].str.lower()
+    
         return tokdf.copy()
