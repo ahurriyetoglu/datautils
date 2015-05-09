@@ -63,6 +63,7 @@ class twtokenizer():
         tokdf[newtexcol][tokdf[newtexcol].str.startswith("'")] = tokdf[tokdf[newtexcol].str.startswith("'")][newtexcol].apply(lambda tw: "' "+tw[1:])
     
         tokdf[newtexcol] = tokdf[newtexcol].apply(tokenize)
+        tokdf[newtexcol] = tokdf[newtexcol].str.strip()
         tokdf[rescol] = tokdf[newtexcol].str.split()
         
         if addLowerTok:
