@@ -16,9 +16,11 @@ class twtokenizer():
     ,"😰😰*":" :'( " ,"😍😍*":" <3 ","😘😘*":" <3 ","<33*":" <3 ","<3(<3)*":" <3 ","😳😳*":" 😳 ", "😻😻*":" 😻 ", "\n\n*":" \n ", "♪♪*":" ♪ "
     ,"💧💧*":" 💧 ", """\xa0""":" ", "\n":" . ","【【*":" 【 ","】】*":" 】 ","「「*":" 「 ","」」*":" 」 ","❤️❤️*":" <3 ","🎶🎶*":" 🎶 "
     ,"😌😌*":" :) ","💖💖*":" <3 ","😐😐*":" :| ","\.: ":" .: "})
+    
+        self.abbreviations = ['i.v.m.','a.s.','knp.']
 
     def tokenize(self, tw):
-        self.abbreviations = ['i.v.m.','a.s.','knp.']
+        
         newtw = ''
         lentw = len(tw)
         for i, c in enumerate(tw):
@@ -29,7 +31,7 @@ class twtokenizer():
             elif (c in '();>:.') and ((lentw>i+1) and (i!=0)) and ((tw[i-1].isalpha()) or (tw[i-1] in '0123456789')) and ((tw[i+1] == ' ') or (i == lentw-1)):
                 newtw += ' '+c
             elif (c in '.') and ((lentw>i+1) and (i!=0)) and ((tw[i-1].isalpha()) or (tw[i-1] in '0123456789')) and ((tw[i+1] == ' ') or (i == lentw-1)) \
-                            and (newtw.split()[-1][-1:] not in self.abbreviations):
+                            and (newtw.split()[-1]+'.' not in self.abbreviations):
                 newtw += ' '+c
             elif (c in "'`´’‘()+*->") and (i==0) and (lentw > 1) and ((tw[1].isalpha()) or tw[1] in "0123456789"):
                 newtw += c+' '
