@@ -21,7 +21,6 @@ class twtokenizer():
         print('init:',self.abbreviations)
 
     def tokenize(self, tw):
-        print('tokenize:',self.abbreviations)
         newtw = ''
         lentw = len(tw)
         for i, c in enumerate(tw):
