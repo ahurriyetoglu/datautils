@@ -41,7 +41,7 @@ class twtokenizer():
                 newtw += c
             elif (c in ",&"):
                 newtw += " "+c+" "
-            elif (c in "â"):
+            elif (c in "â"): # create a dictionary for character mappings. if c in dict: newtw += dict[c]
                 newtw += "a"
             elif (c in "ê"):
                 newtw += "e"
