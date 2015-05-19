@@ -8,7 +8,7 @@ class twtokenizer():
     ,'…':' … ',"\(\(*":'(',"\)\)*":')',"\+\+*":'+',"\*\**":'*',"\|\|*":"|","\$\$*":"$","%%*":"%",">>*":">","<<*":"<","--*":"-" 
     ,"\/\/\/*":"//","(:d)(:d)*":":d",":ddd*":" :d ",":ppp*":" :p ",";;;*":";",":\* ":" :* ",":\(":" :( ","\(:":" (: ",":\)":" :) "
     ,'\):':' ): ',";\)":" ;) ","\+\+":" + ",":\|":" :| ",":-\)":" :-) ",";-\)":" ;-) ",":-\(":" :-( ",":\'\(":" :'( ",":p ":" :p "
-    ,";p ":" ;p ",":d ":" :d ","-_-":" -_- ",":o\)":" :o) ",":\$":" :$ ","\.@":". @",'#':' #','\. ': ' . ',' \.': ' . ','    ':' '
+    ,";p ":" ;p ",":d ":" :d ","-_-":" -_- ",":o\)":" :o) ",":\$":" :$ ","\.@":". @",'#':' #',' \.': ' . ','    ':' '
     ,'   ':' ','   ':' ','  ':' ',"😡😡*":" :( ","☺️☺️*":" :) ","😄😄*":" :d ","😃😃*":" :d ","😆😆*":" :d ","😷😷*":" :d "
     ,"😅😅*":" :d ","😋😋*":" :d ","😜😜*":" :p " ,"😝😝*":" :p ","😂😂*":" :'( ","😢😢*":" :'( ","😁😁*":" :( ","😞😞*":" :( "
     ,"😖😖*":" :( " ,"😥😥*":" :( ","😩😩*":" :( ","😊😊*":" :) ","😉😉*":" :) ","😎😎*":" :) " ,"😇😇*":" :) ","😭😭*":" :'d " 
@@ -17,11 +17,13 @@ class twtokenizer():
     ,"💧💧*":" 💧 ", """\xa0""":" ", "\n":" . ","【【*":" 【 ","】】*":" 】 ","「「*":" 「 ","」」*":" 」 ","❤️❤️*":" <3 ","🎶🎶*":" 🎶 "
     ,"😌😌*":" :) ","💖💖*":" <3 ","😐😐*":" :| ","\.: ":" .: "})
     
+    # '\. ': ' . ' --> deleted from toReplaceDict to be able to process the abbreviations.
+    
         self.abbreviations = ['i.v.m.','a.s.','knp.']
         print('init:',self.abbreviations)
 
     def tokenize(self, tw):
-        abbcheck = False
+        #abbcheck = False
         newtw = ''
         lentw = len(tw)
         print(tw)
@@ -56,11 +58,11 @@ class twtokenizer():
             else:
                 newtw += c
             #print(c in "'`´’()+*-", lentw>i+1, i>0, tw[i-1] == ' 0123456789', tw[i+1].isalpha())
-            if abbcheck:
-                print("abbcheck is true:",newtw.split())
-            print(i,c,(c in '.'), ((lentw>i+1) and (i!=0)), ((tw[i-1].isalpha()) or (tw[i-1] in '0123456789')), ((tw[i+1] == ' ') or (i == lentw-1)) \
-                            and (newtw.split()[-1]+c not in self.abbreviations))
-        print('\n\n')
+            #if abbcheck:
+            #    print("abbcheck is true:",newtw.split())
+            #print(i,c,(c in '.'), ((lentw>i+1) and (i!=0)), ((tw[i-1].isalpha()) or (tw[i-1] in '0123456789')), ((tw[i+1] == ' ') or (i == lentw-1)) \
+            #                and (newtw.split()[-1]+c not in self.abbreviations))
+        #print('\n\n')
         return newtw
 
     def tokenize_df(self, tokdf,texcol="tweet", newtexcol='texttokCap',rescol="ttextlist", addLowerTok=True):
