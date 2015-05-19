@@ -26,7 +26,7 @@ class twtokenizer():
         #abbcheck = False
         newtw = ''
         lentw = len(tw)
-        print(tw)
+        #print(tw)
         for i, c in enumerate(tw):
             if (c in "'`´’‘") and ((i+1 != lentw) and (i!=0)) and ((tw[i-1].isalpha()) or tw[i-1] in "0123456789") and (tw[i+1].isalpha()):
                 newtw += ' '+c+' '
