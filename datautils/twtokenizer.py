@@ -21,6 +21,7 @@ class twtokenizer():
         print('init:',self.abbreviations)
 
     def tokenize(self, tw):
+        abbcheck = False
         newtw = ''
         lentw = len(tw)
         for i, c in enumerate(tw):
@@ -32,6 +33,7 @@ class twtokenizer():
                 newtw += ' '+c
             elif (c in '.') and ((lentw>i+1) and (i!=0)) and ((tw[i-1].isalpha()) or (tw[i-1] in '0123456789')) and ((tw[i+1] == ' ') or (i == lentw-1)) \
                             and (newtw.split()[-1]+c not in self.abbreviations):
+                
                 newtw += " "+c
             elif (c in "'`´’‘()+*->") and (i==0) and (lentw > 1) and ((tw[1].isalpha()) or tw[1] in "0123456789"):
                 newtw += c+' '
@@ -53,7 +55,8 @@ class twtokenizer():
             else:
                 newtw += c
             #print(c in "'`´’()+*-", lentw>i+1, i>0, tw[i-1] == ' 0123456789', tw[i+1].isalpha())
-                
+            if abbcheck:
+                print(newtw.split())
         return newtw
 
     def tokenize_df(self, tokdf,texcol="tweet", newtexcol='texttokCap',rescol="ttextlist", addLowerTok=True):
