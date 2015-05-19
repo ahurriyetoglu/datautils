@@ -18,9 +18,10 @@ class twtokenizer():
     ,"😌😌*":" :) ","💖💖*":" <3 ","😐😐*":" :| ","\.: ":" .: "})
     
         self.abbreviations = ['i.v.m.','a.s.','knp.']
+        print('init:',self.abbreviations)
 
     def tokenize(self, tw):
-        
+        print('tokenize:',self.abbreviations)
         newtw = ''
         lentw = len(tw)
         for i, c in enumerate(tw):
