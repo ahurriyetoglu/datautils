@@ -1,5 +1,6 @@
 import pandas as pd
 from collections import Counter
+import json
 
 def getlinelist(filename, striplines=True):
 	with open(filename) as f:
