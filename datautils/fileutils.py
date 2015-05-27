@@ -43,7 +43,57 @@ def read_twiqs_csv(twiqs_csv, how="basic"):
 		raise Exception("there is a problem in the --how-- parameter. Current value:",how)
 
 		
-	
+def read_json_tweets_file(myjsontweetfile, reqlang='en'):
+    ftwits = []
+    lang_cntr = Counter()
+
+    with open(myjsontweetfile) as jfile:
+        for i, ln in enumerate(jfile):
+            
+            t = json.loads(ln)
+            lang_cntr[t["lang"]] += 1
+            
+            if t["lang"] == reqlang:
+                t["created_at"] = datetime.datetime.strptime(t["created_at"],"%a %b %d %H:%M:%S +0000 %Y")
+
+                #if t["created_at"].strftime("%Y-%m-%d") in flood_AnomBreakoutDaysList:
+
+                if "media" in t["entities"]:
+                    for tm in t["entities"]["media"]:
+                        if tm["type"] == 'photo':
+                            t["entity_type"] = 'photo'
+                            break
+
+                t["entity_hashtags"] = [ehs["text"] for ehs in t["entities"]["hashtags"]]
+                t["entity_mentions"] = [ems["screen_name"] for ems in t["entities"]["user_mentions"]]
+                t["entity_urls"] = [ers["display_url"] for ers in t["entities"]["urls"]]
+
+                
+                try:
+                    if "place" in t:
+                        t["country"] = t["place"]["country"]
+                except:
+                    pass
+                    
+
+                if "retweeted_status" in t:
+                    t["is_retweet"] = True
+                else:
+                    t["is_retweet"] = False
+
+                t["device"] = strip_tags(t["source"])
+
+                t["user_id"] = t["user"]["id_str"]
+                t["user_followers"] = t["user"]["followers_count"]
+                t["user_following"] = t["user"]["friends_count"]
+
+                t2 = {k:v for k,v in t.items() if k in ["entity_type","entity_hashtags","entity_mentions","entity_urls",\
+                                                        "country","created_at","text","in_reply_to_user_id","id_str","user_id",\
+                                                        "user_followers","user_following", "coordinates", "is_retweet","device"]}
+                #print(i, end=',')
+                ftwits.append(t2)#.splitlines()
+        print(lang_cntr)
+        return ftwits	
 
 if __name__ == "__main__":
 	pass
