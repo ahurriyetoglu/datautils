@@ -57,7 +57,7 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en'):
             lang_cntr[t["lang"]] += 1
             
             if t["lang"] == reqlang:
-                t["created_at"] = datetime.datetime.strptime(t["created_at"],"%a %b %d %H:%M:%S +0000 %Y")
+                t["created_at"] = datetime.strptime(t["created_at"],"%a %b %d %H:%M:%S +0000 %Y")
 
                 #if t["created_at"].strftime("%Y-%m-%d") in flood_AnomBreakoutDaysList:
 
