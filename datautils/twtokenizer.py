@@ -80,7 +80,7 @@ class Twtokenizer():
     
         tokdf[newtexcol] = tokdf[newtexcol].apply(self.tokenize)
         tokdf[newtexcol] = tokdf[newtexcol].str.strip()
-        tokdf[rescol] = tokdf[newtexcol].str.split()
+        #tokdf[rescol] = tokdf[newtexcol].str.split()
         
         if addLowerTok:
             tokdf[newtexcol[:-3]] = tokdf[newtexcol].str.lower()
