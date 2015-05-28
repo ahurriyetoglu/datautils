@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-class twtokenizer():
+class Twtokenizer():
     
     def __init__(self):
         self.toReplaceDict = OrderedDict({'!!*':' ! ','\?':' ? ', '\"':' " ',"“":" “ ","”":" ” ", "\'\'*":"'","\' ":" ' "
