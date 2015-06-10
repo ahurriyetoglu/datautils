@@ -68,6 +68,7 @@ def read_twiqs_csv(twiqs_csv, how="basic"):
 def read_json_tweets_file(myjsontweetfile, reqlang='en'):
     ftwits = []
     lang_cntr = Counter()
+    print("processed file:",myjsontweetfile)
     print("Language of the processed tweets:",reqlang)
 
     with open(myjsontweetfile) as jfile:
