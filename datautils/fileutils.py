@@ -73,8 +73,13 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en'):
 
     with open(myjsontweetfile) as jfile:
         for i, ln in enumerate(jfile):
+            try:
+            	t = json.loads(ln)
+            except:
+            	print("Error in the line number:",i,"the line is:",t)
+            	print("Unexpected error:", sys.exc_info()[0])
+            	raise
             
-            t = json.loads(ln)
             lang_cntr[t["lang"]] += 1
             
             if t["lang"] == reqlang:
