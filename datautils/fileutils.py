@@ -79,7 +79,8 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en'):
             except:
             	print("Error in the line number:",i,"the line is:",t)
             	print("Unexpected error:", sys.exc_info()[0])
-            	raise
+            	continue
+            	#raise
             
             lang_cntr[t["lang"]] += 1
             
