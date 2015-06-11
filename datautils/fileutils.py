@@ -3,6 +3,7 @@ from collections import Counter
 import json
 from datetime import datetime
 from html.parser import HTMLParser
+import sys
 
 class MLStripper(HTMLParser):
     def __init__(self):
