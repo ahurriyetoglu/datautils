@@ -122,7 +122,9 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
                 t["device"] = strip_tags(t["source"])
 
                 t["user_id"] = t["user"]["id_str"]
-                t["user_followers"] = t["user"]["followers_count"]
+                
+                if "followers_count" in t["user"]:
+                    t["user_followers"] = t["user"]["followers_count"]
                 
                 if "friends_count" in t["user"]:
                     t["user_following"] = t["user"]["friends_count"]
