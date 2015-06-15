@@ -91,22 +91,21 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
                 t["created_at"] = datetime.strptime(t["created_at"],"%a %b %d %H:%M:%S +0000 %Y")
 
                 #if t["created_at"].strftime("%Y-%m-%d") in flood_AnomBreakoutDaysList:
-
-                if "media" in t["entities"]:
-                    for tm in t["entities"]["media"]:
-                        if tm["type"] == 'photo':
-                            t["entity_type"] = 'photo'
-                            break
-                # if it is empty, this field may not be present.
-                if "hashtags" in t["entities"]:
-                    t["entity_hashtags"] = [ehs["text"] for ehs in t["entities"]["hashtags"]]
+		if "entities" in t:
+                    if "media" in t["entities"]:
+                        for tm in t["entities"]["media"]:
+                            if tm["type"] == 'photo':
+                                t["entity_type"] = 'photo'
+                                break
+                    # if it is empty, this field may not be present.
+                    if "hashtags" in t["entities"]:
+                        t["entity_hashtags"] = [ehs["text"] for ehs in t["entities"]["hashtags"]]
                 	
-                if "user_mentions" in t["entities"]:
-                    t["entity_mentions"] = [ems["screen_name"] for ems in t["entities"]["user_mentions"]]
+                    if "user_mentions" in t["entities"]:
+                        t["entity_mentions"] = [ems["screen_name"] for ems in t["entities"]["user_mentions"]]
                 
-                if "urls" in t["entities"]:
-                    t["entity_urls"] = [ers["display_url"] for ers in t["entities"]["urls"]]
-
+                    if "urls" in t["entities"]:
+                        t["entity_urls"] = [ers["display_url"] for ers in t["entities"]["urls"]]
                 
                 try:
                     if "place" in t:
