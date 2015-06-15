@@ -97,9 +97,9 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
                         if tm["type"] == 'photo':
                             t["entity_type"] = 'photo'
                             break
-                
-                if "hashtags" in t["entities"]: # if it is empty, this field may not be present.
-			t["entity_hashtags"] = [ehs["text"] for ehs in t["entities"]["hashtags"]]
+                # if it is empty, this field may not be present.
+                if "hashtags" in t["entities"]:
+                    t["entity_hashtags"] = [ehs["text"] for ehs in t["entities"]["hashtags"]]
                 	
                 t["entity_mentions"] = [ems["screen_name"] for ems in t["entities"]["user_mentions"]]
                 t["entity_urls"] = [ers["display_url"] for ers in t["entities"]["urls"]]
