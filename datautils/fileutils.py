@@ -91,7 +91,7 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
                 t["created_at"] = datetime.strptime(t["created_at"],"%a %b %d %H:%M:%S +0000 %Y")
 
                 #if t["created_at"].strftime("%Y-%m-%d") in flood_AnomBreakoutDaysList:
-		if "entities" in t:
+                if "entities" in t:
                     if "media" in t["entities"]:
                         for tm in t["entities"]["media"]:
                             if tm["type"] == 'photo':
