@@ -123,7 +123,9 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
 
                 t["user_id"] = t["user"]["id_str"]
                 t["user_followers"] = t["user"]["followers_count"]
-                t["user_following"] = t["user"]["friends_count"]
+                
+                if "friends_count" in t["user"]:
+                    t["user_following"] = t["user"]["friends_count"]
 
                 t2 = {k:v for k,v in t.items() if k in ["entity_type","entity_hashtags","entity_mentions","entity_urls",\
                                                         "country","created_at","text","in_reply_to_user_id","id_str","user_id",\
