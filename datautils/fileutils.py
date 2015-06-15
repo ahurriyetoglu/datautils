@@ -66,7 +66,7 @@ def read_twiqs_csv(twiqs_csv, how="basic"):
 		raise Exception("there is a problem in the --how-- parameter. Current value:",how)
 
 		
-def read_json_tweets_file(myjsontweetfile, reqlang='en'):
+def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
     ftwits = []
     lang_cntr = Counter()
     print("processed file:",myjsontweetfile)
@@ -74,6 +74,9 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en'):
 
     with open(myjsontweetfile) as jfile:
         for i, ln in enumerate(jfile):
+            if i == numLines: # it will first <numLines> lines.
+            	break
+            
             try:
             	t = json.loads(ln)
             except:
