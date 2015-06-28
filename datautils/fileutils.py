@@ -119,7 +119,8 @@ def read_json_tweets_file(myjsontweetfile, reqlang='en', numLines=-1):
                 else:
                     t["is_retweet"] = False
 
-                t["device"] = strip_tags(t["source"])
+                if "source" in t:
+                    t["device"] = strip_tags(t["source"])
 
                 t["user_id"] = t["user"]["id_str"]
                 
